@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>retroplayer</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/main.js" type="module"></script>
+  </head>
+
+  <body>
+    <button id="boton">Mostrar un saludo</button>
+    <x-drop></x-drop>
+    <x-stats></x-stats>
+
+    <div class="button">PLAY</div>
+
+    <x-player></x-player>
+    <x-bus></x-bus>
+  </body>
+
+  <script>
+    var boton = document.getElementById("boton");
+    boton.addEventListener("click", saludar);
+
+    function saludar() {
+      alert("¡Hola!");
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register("/serviceworker.js");
+    }
+  </script>
+</html>

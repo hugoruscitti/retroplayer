@@ -1,0 +1,8 @@
+#drop_zone {
+  border: 5px solid blue;
+  padding: 2em;
+}
+
+.over {
+  background-color: #ccc;
+}
