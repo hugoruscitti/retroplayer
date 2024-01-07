@@ -1,5 +1,5 @@
-import { sanitize } from "/js/utils.js";
 import bus from "/js/bus.js";
+import { crear_id } from "/js/utils.js";
 
 class Drop extends HTMLElement {
 
@@ -22,10 +22,6 @@ class Drop extends HTMLElement {
       <div id="drop_zone">
         Pon tus archivos aquí
       </div>
-
-
-      <ul id="list">
-      </ul>
     `;
   }
 
@@ -70,8 +66,9 @@ class Drop extends HTMLElement {
 
         let contenido = await leer_archivo(file);
         let nombre = file.name;
+        let id = crear_id();
 
-        files = [...files, {contenido, nombre}];
+        files = [...files, {id, contenido, nombre}];
       }
     }
 
@@ -80,11 +77,8 @@ class Drop extends HTMLElement {
     if (files.length > 0) {
       bus.enviar("evento-cambia-la-lista-de-archivos", files);
       bus.enviar("evento-reproducir-desde-el-principio", {});
-
-      this.draw_list(files);
     } else {
-      // si ningún archivo es .mp3 muestra un error.
-      this.draw_no_files();
+      bus.enviar("evento-cambia-la-lista-de-archivos", []);
     }
 
     // Elimina el efecto de "sombreado" sobre el que se colocan los archivos.
@@ -102,17 +96,6 @@ class Drop extends HTMLElement {
     drop_zone.removeEventListener("dragover", this.on_drag_over.bind(this));
     drop_zone.removeEventListener("dragleave", this.on_drag_leave.bind(this));
     drop_zone.removeEventListener("dragenter", this.on_drag_enter.bind(this));
-  }
-
-
-  draw_list(files) {
-    var list = this.querySelector("#list");
-    list.innerHTML = files.map(e => `<li>${sanitize(e.nombre)}</li>`).join("\n");
-  }
-
-  draw_no_files(files) {
-    var list = this.querySelector("#list");
-    list.innerHTML = "Solo se permiten archivos .mp3";
   }
 
 }

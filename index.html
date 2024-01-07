@@ -4,13 +4,15 @@
     <meta charset="utf-8">
     <title>retroplayer</title>
     <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/tachyons.min.css">
     <script src="js/main.js" type="module"></script>
   </head>
 
   <body>
-    <button id="boton">Mostrar un saludo</button>
     <x-drop></x-drop>
+
+    <x-playlist></x-playlist>
     <x-stats></x-stats>
 
     <div class="button">PLAY</div>
@@ -20,13 +22,6 @@
   </body>
 
   <script>
-    var boton = document.getElementById("boton");
-    boton.addEventListener("click", saludar);
-
-    function saludar() {
-      alert("¡Hola!");
-    }
-
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register("/serviceworker.js");
     }

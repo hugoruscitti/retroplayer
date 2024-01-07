@@ -27,11 +27,31 @@ class Datos {
 
   obtener_primer_archivo() {
     if (this.archivos.length === 0) {
-      throw Error("No hay archivos en la lista");
+      console.warn("No hay archivos en la lista");
+      return null;
     }
 
     datos.indice_de_archivo_actual = 0;
     return datos.archivos[0];
+  }
+
+  obtener_archivo_desde_id(id) {
+    var archivo = this.archivos.filter(e=> e.id === id)[0];
+
+    if (!archivo) {
+      throw Error("No existe el archivo buscado: " + id);
+    }
+
+    return archivo;
+  }
+
+
+  actualizar_indice(archivo) {
+    // Cambia el índice de archivo actual en base al archivo que se
+    // quiere reproducir. Esta función se usa dentro del player cuando
+    // el usuario selecciona una canción del playlists de forma arbitraria.
+    
+    this.indice_de_archivo_actual = this.archivos.indexOf(archivo);
   }
 
 }

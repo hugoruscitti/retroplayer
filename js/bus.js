@@ -5,9 +5,11 @@ class Bus {
       "evento-cambia-la-lista-de-archivos",
       "evento-reproducir-desde-el-principio",
       "evento-reproducir",
+      "evento-reproducir-cancion-desde-archivo",
       "evento-pausar",
       "evento-finaliza-cancion",
       "evento-finaliza-lista-de-archivos",
+      "evento-comienza-a-reproducir-cancion",
     ];
   }
 
@@ -21,7 +23,7 @@ class Bus {
   validar_evento(nombre, datos) {
     console.assert(typeof nombre === "string", "Nombre inválido");
     console.assert(typeof datos === "object", "Datos inválidos");
-    console.assert(this.eventos.includes(nombre), "Evento no declarado");
+    console.assert(this.eventos.includes(nombre), "Evento '" +nombre + "' no declarado");
   }
 
   conectar(nombre, funcion) {
