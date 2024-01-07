@@ -13,7 +13,6 @@ customElements.define("x-player", Player);
 customElements.define("x-playlist", Playlist);
 customElements.define("x-playlist-item", PlaylistItem);
 
-
 // DEBUG
 import fixture from "/js/fixture.js";
 bus.enviar("evento-cambia-la-lista-de-archivos", fixture.archivos);

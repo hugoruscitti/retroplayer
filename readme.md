@@ -1,3 +1,25 @@
+## Instalación
+
+Para iniciar el proyecto se tiene que iniciar un servidor
+web y acceder al archivo index.html desde un navegador.
+
+
+Para facilitar un poco las cosas durante el desarrollo se
+puede usar un webserver que actualice el navegador
+automáticamente como este:
+
+pip install httpwatcher
+httpwatcher
+
+o bien:
+
+npm install -g live-server
+live-server
+
+Las dos herramientas hacen lo mismo, muestran la aplicación
+en un navegador y mantienen actualizado el contenido ante
+cada cambio de archivo.
+
 ## ¿cómo funciona?
 
 El código del proyecto está realizado con Vanilla JavaScript, así que lo
