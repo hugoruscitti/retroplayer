@@ -4,12 +4,22 @@ class Bus {
     this.eventos = [
       "evento-cambia-la-lista-de-archivos",
       "evento-reproducir-desde-el-principio",
-      "evento-reproducir",
-      "evento-reproducir-cancion-desde-archivo",
+      "evento-reproducir", // datos = {} , se envía cuando se quiere reproducir la canción actual.
+      "evento-reproducir-cancion-desde-archivo", // cuando se quiere reproducir haciendo click en el playlist.
       "evento-pausar",
+      "evento-detener",
       "evento-finaliza-cancion",
       "evento-finaliza-lista-de-archivos",
       "evento-comienza-a-reproducir-cancion",
+      "evento-cambia-tiempo", // datos = {actual, duracion}
+      "evento-solicita-cambiar-tiempo", // datos = {porcentaje}
+
+      "evento-player-ha-sido-pausado",
+      "evento-player-comienza-a-reproducir",
+      "evento-player-se-ha-detenido",
+
+      "evento-avanzar-cancion",
+      "evento-retroceder-cancion",
     ];
   }
 

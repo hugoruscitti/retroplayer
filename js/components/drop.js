@@ -1,79 +1,22 @@
 import bus from "/js/bus.js";
-import { crear_id } from "/js/utils.js";
+import { crear_id, leer_archivo } from "/js/utils.js";
 
 class Drop extends HTMLElement {
 
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
-    this.initial_render();
-    var drop_zone = this.querySelector("#drop_zone");
+    var body = document.querySelector("html");
 
-    drop_zone.addEventListener("drop", this.drop_handler.bind(this));
-    drop_zone.addEventListener("dragover", this.on_drag_over.bind(this));
-    drop_zone.addEventListener("dragleave", this.on_drag_leave.bind(this));
-    drop_zone.addEventListener("dragenter", this.on_drag_enter.bind(this));
-  }
-
-  initial_render() {
-    this.innerHTML = `
-      <div id="drop_zone">
-        Pon tus archivos aquí
-      </div>
-    `;
-  }
-
-  on_drag_enter(event) {
-    var drop_zone = this.querySelector("#drop_zone");
-    drop_zone.classList.add("over");
-  }
-
-  on_drag_leave(event) {
-    var drop_zone = this.querySelector("#drop_zone");
-    drop_zone.classList.remove("over");
-  }
-
-  on_drag_over(event) {
-    var drop_zone = this.querySelector("#drop_zone");
-    drop_zone.classList.remove("over");
+    body.addEventListener("drop", this.drop_handler.bind(this));
+    body.addEventListener("dragover", this.on_drag_over.bind(this));
   }
 
   async drop_handler(ev) {
-    var files = [];
-
-    // Evita que los archivos se abran.
+    // Evita que los archivos se abran directamente en el navegador.
     ev.preventDefault();
 
-    async function leer_archivo(archivo) {
-      return new Promise((success, fail) => {
-        var freader = new FileReader();
+    let files = await this.abrir_archivos(ev.dataTransfer.files);
 
-        freader.onload = function(e) {
-          success(e.target.result);
-        }
-
-        freader.readAsDataURL(archivo);
-      });
-    }
-
-    if (ev.dataTransfer.files) {
-      let lista = [...ev.dataTransfer.files];
-
-      for (var i=0; i<lista.length; i++) {
-        let file = lista[i];
-
-        let contenido = await leer_archivo(file);
-        let nombre = file.name;
-        let id = crear_id();
-
-        files = [...files, {id, contenido, nombre}];
-      }
-    }
-
-
-
+    // informa los archivos a  incorporar.
     if (files.length > 0) {
       bus.enviar("evento-cambia-la-lista-de-archivos", files);
       bus.enviar("evento-reproducir-desde-el-principio", {});
@@ -94,8 +37,37 @@ class Drop extends HTMLElement {
   disconnectedCallback() {
     drop_zone.removeEventListener("drop", this.drop_handler.bind(this));
     drop_zone.removeEventListener("dragover", this.on_drag_over.bind(this));
-    drop_zone.removeEventListener("dragleave", this.on_drag_leave.bind(this));
-    drop_zone.removeEventListener("dragenter", this.on_drag_enter.bind(this));
+  }
+
+  async abrir_archivos(archivos_originales) {
+    let archivos = [];
+
+    // itera por la lista de archivos y carga el contenido de cada
+    // uno de los archivos en una lista.
+    if (archivos_originales) {
+      let lista = [...archivos_originales];
+
+      for (var i=0; i<lista.length; i++) {
+        let archivo = lista[i];
+
+        // Si no es un archivo .mp3 pasa al siguiente archivo.
+        if (!archivo.name.toLowerCase().endsWith(".mp3")) {
+          continue;
+        }
+
+        let contenido = await leer_archivo(archivo);
+        let nombre = archivo.name;
+        let id = crear_id();
+
+        archivos = [...archivos, {id, contenido, nombre}];
+      }
+    }
+
+    archivos.sort(function(a, b) {
+      return b.nombre > a.nombre;
+    });
+
+    return archivos;
   }
 
 }

@@ -25,6 +25,16 @@ class Datos {
     return this.archivos[this.indice_de_archivo_actual];
   }
 
+  obtener_archivo_anterior() {
+    this.indice_de_archivo_actual -= 1;
+
+    if (this.indice_de_archivo_actual < 0) {
+      this.indice_de_archivo_actual = 0;
+    }
+
+    return this.archivos[this.indice_de_archivo_actual];
+  }
+
   obtener_primer_archivo() {
     if (this.archivos.length === 0) {
       console.warn("No hay archivos en la lista");

@@ -9,16 +9,29 @@
     <script src="js/main.js" type="module"></script>
   </head>
 
-  <body>
+  <body class="no-user-select">
     <x-drop></x-drop>
 
     <x-playlist></x-playlist>
-    <x-stats></x-stats>
-
-    <div class="button">PLAY</div>
 
     <x-player></x-player>
     <x-bus></x-bus>
+
+    <div class="fondo relative">
+      <x-led></x-led>
+      <x-display></x-display>
+      <x-titulo-de-archivo></x-titulo-de-archivo>
+      <x-barra-de-progreso></x-barra-de-progreso>
+      <x-volumen></x-volumen>
+
+      <x-boton-reproducir></x-boton-reproducir>
+      <x-boton-detener></x-boton-detener>
+      <x-boton-pausar></x-boton-pausar>
+      <x-boton-retroceder></x-boton-retroceder>
+      <x-boton-avanzar></x-boton-avanzar>
+    </div>
+
+
   </body>
 
   <script>
