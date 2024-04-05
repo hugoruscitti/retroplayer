@@ -1,5 +1,5 @@
-import bus from "/js/bus.js";
-import datos from "/js/datos.js";
+import bus from "./js/bus.js";
+import datos from "./js/datos.js";
 
 export default class PlaylistItem extends HTMLElement {
 

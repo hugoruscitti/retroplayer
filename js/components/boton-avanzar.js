@@ -1,4 +1,4 @@
-import bus from "/js/bus.js";
+import bus from "./js/bus.js";
 
 export default class BotonAvanzar extends HTMLElement {
 
