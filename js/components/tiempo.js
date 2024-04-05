@@ -1,5 +1,5 @@
-import bus from "/js/bus.js";
-import { formatear_tiempo } from "/js/utils.js";
+import bus from "../bus.js";
+import { formatear_tiempo } from "../utils.js";
 
 export default class Tiempo extends HTMLElement {
 

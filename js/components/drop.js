@@ -1,4 +1,4 @@
-import bus from "/js/bus.js";
+import bus from "../bus.js";
 import { crear_id, leer_archivo } from "/js/utils.js";
 
 class Drop extends HTMLElement {

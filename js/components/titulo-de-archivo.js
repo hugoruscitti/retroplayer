@@ -1,4 +1,4 @@
-import bus from "/js/bus.js";
+import bus from "../bus.js";
 
 export default class TituloDeArchivo extends HTMLElement {
 
