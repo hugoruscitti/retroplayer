@@ -36,7 +36,7 @@ customElements.define("x-led", Led);
 customElements.define("x-volumen", Volumen);
 
 // DEBUG
-import fixture from "../fixture.js";
+import fixture from "./fixture.js";
 bus.enviar("evento-cambia-la-lista-de-archivos", fixture.archivos);
 
 //
