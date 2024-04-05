@@ -1,3 +1,18 @@
+## Demostración
+
+Puedes acceder a la aplicación usando este link:
+
+- https://hugoruscitti.github.io/retroplayer/
+
+
+Y si quieres instalar la aplicación tienes que pulsar este botón en
+la barra de dirección del navegador:
+
+
+
+
+
+
 ## Instalación
 
 Para iniciar el proyecto se tiene que iniciar un servidor
