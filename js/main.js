@@ -15,8 +15,8 @@ import BotonAvanzar from "./components/boton-avanzar.js";
 import Led from "./components/led.js";
 import Volumen from "./components/volumen.js";
 
-import bus from "/js/bus.js";
-import datos from "/js/datos.js";
+import bus from "./js/bus.js";
+import datos from "./js/datos.js";
 
 customElements.define("x-drop", Drop);
 customElements.define("x-player", Player);
