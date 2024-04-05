@@ -49,12 +49,12 @@
 /* fuentes */
 @font-face {
   font-family: 'fuente-principal';
-  src: url('/fonts/texto.ttf');
+  src: url('../fonts/texto.ttf');
 }
 
 @font-face {
   font-family: 'fuente-de-numeros';
-  src: url('/fonts/digital.ttf');
+  src: url('../fonts/digital.ttf');
 }
 
 

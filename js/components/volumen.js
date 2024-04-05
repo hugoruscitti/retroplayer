@@ -28,7 +28,7 @@ export default class Volumen extends HTMLElement {
 
     // cambia el fondo para que muestre un color cálido cuando
     // el volumen está muy alto.
-    elemento.style.background = `url("/img/volumen.png") 0px ${-volumen*8}px`;
+    elemento.style.background = `url("img/volumen.png") 0px ${-volumen*8}px`;
   }
 
   mover_cursor(progreso) {
