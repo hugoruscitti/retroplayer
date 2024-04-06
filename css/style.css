@@ -10,7 +10,8 @@
 .fondo {
   background-image: url("../img/fondo.png");
   width: 548px;
-  height: 244px;
+  height: 243px;
+  margin-top: -32px;
 }
 
 /* barra-de-progreso */
@@ -210,4 +211,10 @@
   top: 3px;
   position: absolute;
   left: 4px;
+}
+
+
+.playlist {
+  font-family: fuente-principal;
+  color: lawngreen;
 }

@@ -9,7 +9,7 @@ export default class PlaylistItem extends HTMLElement {
 
   connectedCallback() {
     let nombre = this.getAttribute("nombre");
-    this.innerHTML = "<li class='ba pa2 pointer ma1'>" + nombre + "</li>";
+    this.innerHTML = "<li class='pa2 pointer'>" + nombre + "</li>";
 
     bus.conectar("evento-comienza-a-reproducir-cancion", this.alternar_seleccion.bind(this));
     this.addEventListener("click", this.reproducir.bind(this));
@@ -27,9 +27,9 @@ export default class PlaylistItem extends HTMLElement {
     // se intenta destacar o no el elemento actual.
     
     if (id === this.getAttribute("id")) {
-      this.classList.add("red");
+      this.classList.add("white");
     } else {
-      this.classList.remove("red");
+      this.classList.remove("white");
     }
   }
 
