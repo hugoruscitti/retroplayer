@@ -1,3 +1,10 @@
+all:
+	@echo ""
+	@echo "ejecutar"
+	@echo "ejecutar-sin-live-reload"
+	@echo "actualizar-cache"
+	@echo ""
+
 GITHASH = $(shell git rev-parse --short HEAD)
 
 ejecutar:
@@ -8,4 +15,4 @@ ejecutar-sin-live-reload:
 
 actualizar-cache:
 	echo "s/cache=(.)/cache=$(GITHASH)/g"
-	sed -i "" "s/cache=(.*)/cache=$(GITHASH)/g" index.html
+	sed -i '' 's/cache=.*"/cache=$(GITHASH)"/g' index.html
