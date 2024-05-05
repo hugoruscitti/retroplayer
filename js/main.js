@@ -44,7 +44,14 @@ bus.enviar("evento-cambia-la-lista-de-archivos", fixture.archivos);
 // end debug
 
 
-window.resizeTo(548, 243);
+// TODO: llevar a una función propia, se encarga de mantener
+// el tamaño de pantalla fijo.
+const W = 548;
+const H = 450;
+window.resizeTo(W, H);
+window.addEventListener('resize', () => {
+  window.resizeTo(W, H)
+});
 
 window.d = {
   bus,
