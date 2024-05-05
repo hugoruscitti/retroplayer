@@ -11,7 +11,7 @@ ejecutar:
 	httpwatcher
 
 ejecutar-sin-live-reload:
-	python -m http.server 5555
+	python -m http.server 5555 --bind 0.0.0.0
 
 actualizar-cache:
 	echo "s/cache=(.)/cache=$(GITHASH)/g"

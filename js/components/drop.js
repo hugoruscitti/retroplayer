@@ -1,5 +1,5 @@
 import bus from "../bus.js";
-import { crear_id, leer_archivo } from "../utils.js";
+import { crear_id, leer_archivo, obtener_archivos_del_directorio } from "../utils.js";
 
 class Drop extends HTMLElement {
 
@@ -14,7 +14,7 @@ class Drop extends HTMLElement {
     // Evita que los archivos se abran directamente en el navegador.
     ev.preventDefault();
 
-    let files = await this.abrir_archivos(ev.dataTransfer.files);
+    let files = await this.abrir_archivos(ev.dataTransfer.items);
 
     // informa los archivos a  incorporar.
     if (files.length > 0) {
@@ -23,10 +23,6 @@ class Drop extends HTMLElement {
     } else {
       bus.enviar("evento-cambia-la-lista-de-archivos", []);
     }
-
-    // Elimina el efecto de "sombreado" sobre el que se colocan los archivos.
-    var drop_zone = this.querySelector("#drop_zone");
-    drop_zone.classList.remove("over");
   }
 
   on_drag_over(ev) {
@@ -40,6 +36,7 @@ class Drop extends HTMLElement {
   }
 
   async abrir_archivos(archivos_originales) {
+    let entries = Array.from(archivos_originales).map(e => e.webkitGetAsEntry())
     let archivos = [];
 
     // itera por la lista de archivos y carga el contenido de cada
@@ -48,18 +45,25 @@ class Drop extends HTMLElement {
       let lista = [...archivos_originales];
 
       for (var i=0; i<lista.length; i++) {
-        let archivo = lista[i];
+        let item = lista[i].webkitGetAsEntry();
 
-        // Si no es un archivo .mp3 pasa al siguiente archivo.
-        if (!archivo.name.toLowerCase().endsWith(".mp3")) {
-          continue;
+
+        // Si es un archivo
+
+        if (item.isFile && item.name.toLowerCase().endsWith(".mp3")) {
+          let contenido = await leer_archivo(lista[i]);
+          let nombre = item.name;
+          let id = crear_id();
+          archivos = [...archivos, {id, contenido, nombre}];    
         }
 
-        let contenido = await leer_archivo(archivo);
-        let nombre = archivo.name;
-        let id = crear_id();
+        // Si es un directorio
+        if (item.isDirectory) {
+          let entries = await obtener_archivos_del_directorio(item);
+          console.log(entries);
+        }
 
-        archivos = [...archivos, {id, contenido, nombre}];
+
       }
     }
 
@@ -69,6 +73,8 @@ class Drop extends HTMLElement {
 
     return archivos;
   }
+
+
 
 }
 

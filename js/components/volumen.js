@@ -42,7 +42,7 @@ export default class Volumen extends HTMLElement {
     this.pulsado = true;
 
     // TODO: cambiar el gráfico del cursor para que aparezca pulsado.
-    console.log("mouse down");
+    console.log("Se ha pulsado el mouse");
   }
 
   saludar(nombre) {

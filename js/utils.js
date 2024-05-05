@@ -20,7 +20,7 @@ async function leer_archivo(archivo) {
       success(e.target.result);
     }
 
-    freader.readAsDataURL(archivo);
+    freader.readAsDataURL(archivo.getAsFile());
   });
 }
 
@@ -29,9 +29,27 @@ function formatear_tiempo(tiempo) {
   return tiempo_como_texto.substr(14, 8).split(".")[0];
 }
 
+async function obtener_archivos_del_directorio(item) {
+  return new Promise((success) => {
+    let directoryReader = item.createReader();
+    
+    directoryReader.readEntries((entries) => {
+      let archivos = [];
+      
+      entries.forEach((entry) => {
+        console.log(entry);
+        archivos = [...archivos, entry];
+      });
+      
+      success(archivos);
+    });
+  });
+}
+
 export { 
   sanitizar,
   crear_id,
   formatear_tiempo,
   leer_archivo,
+  obtener_archivos_del_directorio,
 };
