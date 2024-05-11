@@ -1,5 +1,5 @@
 import bus from "../bus.js";
-import { crear_id, obtener_file_object, leer_directorio } from "../utils.js";
+import { crear_id, obtener_file_object, leer_directorio, es_archivo_de_audio } from "../utils.js";
 
 class Drop extends HTMLElement {
 
@@ -47,6 +47,8 @@ class Drop extends HTMLElement {
         file_entries = file_entries.sort(function(a, b) {
           return a.name.localeCompare(b.name);
         });
+
+        file_entries = file_entries.filter(es_archivo_de_audio);
 
         for (let j=0; j<file_entries.length; j++) {
           let archivo = await obtener_file_object(file_entries[j]);

@@ -97,7 +97,6 @@ class Player extends HTMLElement {
       this.reproducir();
       bus.enviar("evento-comienza-a-reproducir-cancion", archivo);
     } else {
-      console.log("Ha finalizado de reproducir todo el playlist");
       bus.enviar("evento-finaliza-lista-de-archivos", {});
       this.detener();
     }
@@ -120,7 +119,6 @@ class Player extends HTMLElement {
   }
 
   cuando_se_define_el_volumen(evento) {
-    console.log(evento.detail);
     this.player.volume = evento.detail.volumen;
   }
 

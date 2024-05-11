@@ -35,6 +35,16 @@ async function leer_directorio(directory_entry) {
   });
 }
 
+function es_archivo_de_audio(item) {
+  let nombre = item.name.toLowerCase(); 
+
+  if (nombre.endsWith(".mp4") || nombre.endsWith(".mp3")) {
+    return true;
+  }  else {
+    return false;
+  }
+}
+
 
 
 export { 
@@ -42,6 +52,7 @@ export {
   crear_id,
   formatear_tiempo,
   obtener_file_object,
-  leer_directorio
+  leer_directorio,
+  es_archivo_de_audio,
 };
 
