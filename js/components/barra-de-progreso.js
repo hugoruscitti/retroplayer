@@ -59,6 +59,9 @@ export default class BarraDeProgreso extends HTMLElement {
 
   on_mouse_up(evento) {
     if (this.mouse_down) {
+      let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.parentElement);
+      this.posicionar_cursor(porcentaje);
+
       this.actualizar(evento);
     }
 

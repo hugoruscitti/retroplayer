@@ -1,5 +1,5 @@
 import bus from "../bus.js";
-import { crear_id, leer_archivo, obtener_archivos_del_directorio } from "../utils.js";
+import { crear_id, obtener_file_object, leer_directorio } from "../utils.js";
 
 class Drop extends HTMLElement {
 
@@ -36,40 +36,37 @@ class Drop extends HTMLElement {
   }
 
   async abrir_archivos(archivos_originales) {
-    let entries = Array.from(archivos_originales).map(e => e.webkitGetAsEntry())
     let archivos = [];
+    let entries = Array.from(archivos_originales).map(e => e.webkitGetAsEntry());
 
-    // itera por la lista de archivos y carga el contenido de cada
-    // uno de los archivos en una lista.
-    if (archivos_originales) {
-      let lista = [...archivos_originales];
+    for (let i=0; i<entries.length; i++) {
+      if (entries[i].isDirectory) {
 
-      for (var i=0; i<lista.length; i++) {
-        let item = lista[i].webkitGetAsEntry();
+        let file_entries = await leer_directorio(entries[i]);
 
+        file_entries = file_entries.sort(function(a, b) {
+          return a.name.localeCompare(b.name);
+        });
 
-        // Si es un archivo
-
-        if (item.isFile && item.name.toLowerCase().endsWith(".mp3")) {
-          let contenido = await leer_archivo(lista[i]);
-          let nombre = item.name;
+        for (let j=0; j<file_entries.length; j++) {
+          let archivo = await obtener_file_object(file_entries[j]);
+          let contenido = URL.createObjectURL(archivo)
+          let nombre = archivo.name;
           let id = crear_id();
-          archivos = [...archivos, {id, contenido, nombre}];    
-        }
 
-        // Si es un directorio
-        if (item.isDirectory) {
-          let entries = await obtener_archivos_del_directorio(item);
-          console.log(entries);
+          archivos = [...archivos, {id, contenido, nombre}];
         }
 
 
+      } else {
+        let archivo = await obtener_file_object(entries[i]);
+        let contenido = URL.createObjectURL(archivo)
+        let nombre = archivo.name;
+        let id = crear_id();
+
+        archivos = [...archivos, {id, contenido, nombre}];
       }
     }
-
-    archivos.sort(function(a, b) {
-      return b.nombre > a.nombre;
-    });
 
     return archivos;
   }

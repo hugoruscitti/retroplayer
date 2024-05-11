@@ -9,7 +9,7 @@ export default class TituloDeArchivo extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div id="titulo-de-archivo" class="titulo-de-archivo truncate">
-        Un nombre
+        Suelta una carpeta con música aquí ...
       <div>
     `;
 

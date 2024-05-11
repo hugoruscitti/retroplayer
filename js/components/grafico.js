@@ -19,6 +19,7 @@ export default class Grafico extends HTMLElement {
 
     bus.conectar("evento-reproducir", this.al_reproducir.bind(this));
     bus.conectar("evento-reproducir-cancion-desde-archivo", this.al_reproducir.bind(this));
+    bus.conectar("evento-reproducir-desde-el-principio", this.al_reproducir.bind(this));
 
     // esta función entra en un loop para redibujar constántemente.
     this.dibujar();

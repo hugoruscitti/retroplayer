@@ -2,6 +2,9 @@
   border: 5px solid blue;
   padding: 2em;
 }
+:root {
+  color-scheme: dark;
+}
 
 .over {
   background-color: #ccc;
@@ -215,6 +218,19 @@
 
 
 .playlist {
-  font-family: fuente-principal;
+  border: 1px solid #2e2e31;
   color: lawngreen;
+  font-family: fuente-principal;
+  height: 250px;
+  overflow-y: scroll;
+  width: 547px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+html {
+  background: #0e0d16;
 }

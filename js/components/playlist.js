@@ -7,7 +7,7 @@ export default class Playlist extends HTMLElement {
   }
 
   connectedCallback() {
-    this.innerHTML = "<ul class='list pa0 ma0 playlist bg-black' id='playlist'></ul>";
+    this.innerHTML = "<ul class='list pa0 ma0 playlist' id='playlist'></ul>";
 
     bus.conectar("evento-cambia-la-lista-de-archivos", (evento) => {
       this.draw_list(evento.detail);

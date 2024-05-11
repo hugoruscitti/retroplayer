@@ -20,6 +20,7 @@ class Bus {
 
       "evento-avanzar-cancion",
       "evento-retroceder-cancion",
+      "evento-definir-volumen",
     ];
   }
 

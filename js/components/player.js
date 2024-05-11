@@ -8,7 +8,7 @@ class Player extends HTMLElement {
   }
 
   connectedCallback() {
-    this.innerHTML = "<audio id='player' class='' controls></audio>";
+    this.innerHTML = "<audio id='player' class='hidden' controls></audio>";
 
     this.player = this.querySelector("#player");
 
@@ -24,6 +24,8 @@ class Player extends HTMLElement {
     bus.conectar("evento-reproducir-cancion-desde-archivo", this.reproducir_desde_archivo.bind(this));
 
     bus.conectar("evento-solicita-cambiar-tiempo", this.cuando_solicitan_cambiar_el_tiempo.bind(this));
+
+    bus.conectar("evento-definir-volumen", this.cuando_se_define_el_volumen.bind(this));
 
     this.player.addEventListener("ended", function() {
       bus.enviar("evento-finaliza-cancion", {});
@@ -112,7 +114,14 @@ class Player extends HTMLElement {
 
   cuando_solicitan_cambiar_el_tiempo(evento) {
     let porcentaje = evento.detail.porcentaje;
-    this.player.currentTime = (porcentaje/100) * this.player.duration
+    if (this.player.currentSrc) {
+      this.player.currentTime = (porcentaje/100) * this.player.duration
+    }
+  }
+
+  cuando_se_define_el_volumen(evento) {
+    console.log(evento.detail);
+    this.player.volume = evento.detail.volumen;
   }
 
 

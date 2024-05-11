@@ -7,7 +7,7 @@ export default class Volumen extends HTMLElement {
 
     this.innerHTML = `<div class="volumen-fondo volumen absolute">
         <div id="volumen" style="" class="volumen-fondo-del-deslizador"></div>
-        <div id="cursor-del-volumen" style="pointer-events:none" class="cursor-del-volumen absolute"></div>
+        <div id="cursor-del-volumen" style="pointer-events:none; left: 75px" class="cursor-del-volumen absolute"></div>
       </div>`;
 
     let volumen = this.firstChild;
@@ -17,7 +17,7 @@ export default class Volumen extends HTMLElement {
     volumen.addEventListener("mousedown", this.on_mouse_down.bind(this));
     document.addEventListener("mouseup", this.on_mouse_up.bind(this));
 
-    this.actualizar_grafico(0);
+    this.actualizar_grafico(15);
   }
 
   actualizar(evento) {
@@ -40,29 +40,25 @@ export default class Volumen extends HTMLElement {
 
   on_mouse_down(evento) {
     this.pulsado = true;
-
-    // TODO: cambiar el gráfico del cursor para que aparezca pulsado.
-    console.log("Se ha pulsado el mouse");
-  }
-
-  saludar(nombre) {
-    console.log(`hola mundo 🔥🔥🔥🔥🔥 ${nombre} 123123`);
+    this.mover_cursor_desde_evento(evento);
   }
 
   on_mouse_up(evento) {
-    console.log("mouse up");
-    this.saludar("Hugo 123");
-    
     this.pulsado = false;
   }
 
   on_mouse_move(evento) {
     if (this.pulsado && evento.target.id === "volumen") {
-      // progreso es un valor entre 0 y 1
-      let progreso = (evento.offsetX-10)/(this.firstChild.clientWidth+20);
-      this.actualizar_grafico(parseInt(progreso, 10) * 27);
-      this.mover_cursor(progreso);
+      this.mover_cursor_desde_evento(evento);
     }
+  }
+
+  mover_cursor_desde_evento(evento) {
+    // progreso es un valor entre 0 y 1
+    let progreso = (evento.offsetX)/(this.firstChild.clientWidth);
+    this.actualizar_grafico(parseInt(progreso * 27, 10));
+    this.mover_cursor(progreso);
+    bus.enviar("evento-definir-volumen", {volumen: progreso});
   }
 
 }

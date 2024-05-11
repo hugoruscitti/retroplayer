@@ -35,19 +35,16 @@ customElements.define("x-boton-avanzar", BotonAvanzar);
 customElements.define("x-led", Led);
 customElements.define("x-volumen", Volumen);
 
-// DEBUG
-import fixture from "./fixture.js";
-bus.enviar("evento-cambia-la-lista-de-archivos", fixture.archivos);
-
-//
-// bus.enviar("evento-reproducir-desde-el-principio", {});
-// end debug
+// NOTA: para pre-cargar dos canciones desactiva las siguientes lineas:
+//import fixture from "./fixture.js";
+//bus.enviar("evento-cambia-la-lista-de-archivos", fixture.archivos);
+//bus.enviar("evento-reproducir-desde-el-principio", {});
 
 
 // TODO: llevar a una función propia, se encarga de mantener
 // el tamaño de pantalla fijo.
 const W = 548;
-const H = 450;
+const H = 550;
 window.resizeTo(W, H);
 window.addEventListener('resize', () => {
   window.resizeTo(W, H)
@@ -55,6 +52,5 @@ window.addEventListener('resize', () => {
 
 window.d = {
   bus,
-  datos,
-  fixture
+  datos
 }

@@ -8,10 +8,10 @@ all:
 GITHASH = $(shell git rev-parse --short HEAD)
 
 ejecutar:
-	httpwatcher
+	httpwatcher -p 8080
 
 ejecutar-sin-live-reload:
-	python -m http.server 5555 --bind 0.0.0.0
+	python -m http.server 5558 --bind 0.0.0.0
 
 actualizar-cache:
 	echo "s/cache=(.)/cache=$(GITHASH)/g"
