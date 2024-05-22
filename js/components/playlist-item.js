@@ -9,7 +9,7 @@ export default class PlaylistItem extends HTMLElement {
 
   connectedCallback() {
     let nombre = this.getAttribute("nombre");
-    this.innerHTML = "<li class='pa2 pointer'>" + nombre + "</li>";
+    this.innerHTML = "<li class='pa2 pointer truncate'>" + nombre + "</li>";
 
     bus.conectar("evento-comienza-a-reproducir-cancion", this.alternar_seleccion.bind(this));
     this.addEventListener("click", this.reproducir.bind(this));

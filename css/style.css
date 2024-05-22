@@ -234,3 +234,9 @@
 html {
   background: #0e0d16;
 }
+
+.trucante {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
