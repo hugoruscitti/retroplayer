@@ -1,9 +1,9 @@
 const cacheName = "retro-player-cache";
 
-async function precache() {
-  const cache = await caches.open(cacheName);
-  return cache.addAll(precachedResources);
-}
+//async function precache() {
+  //const cache = await caches.open(cacheName);
+  //return cache.addAll(precachedResources);
+//}
 
 function isCacheable(request) {
   const url = new URL(request.url);
@@ -14,7 +14,10 @@ async function cacheFirstWithRefresh(request) {
   const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
     if (networkResponse.ok) {
       const cache = await caches.open(cacheName);
-      cache.put(request, networkResponse.clone());
+
+      if (request.url.startsWith("https")) {
+        cache.put(request, networkResponse.clone());
+      }
     }
     return networkResponse;
   });
@@ -22,11 +25,8 @@ async function cacheFirstWithRefresh(request) {
   return (await caches.match(request)) || (await fetchResponsePromise);
 }
 
-console.log('web worker');
-console.log(self);
-
 self.addEventListener("install", (event) => {
-  event.waitUntil(precache());
+  //event.waitUntil(precache());
 });
 
 self.addEventListener("fetch", (event) => {
