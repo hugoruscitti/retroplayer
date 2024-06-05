@@ -4,6 +4,8 @@ all:
 	@echo "ejecutar-sin-live-reload"
 	@echo "actualizar-cache"
 	@echo ""
+	@echo " Nota: cada push hace un deploy acá: https://hugoruscitti.github.io/retroplayer/"
+	@echo ""
 
 GITHASH = $(shell git rev-parse --short HEAD)
 
