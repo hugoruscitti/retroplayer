@@ -1,10 +1,5 @@
 const cacheName = "retro-player-cache";
 
-//async function precache() {
-  //const cache = await caches.open(cacheName);
-  //return cache.addAll(precachedResources);
-//}
-
 function isCacheable(request) {
   const url = new URL(request.url);
   return !url.pathname.endsWith(".json");
@@ -26,7 +21,6 @@ async function cacheFirstWithRefresh(request) {
 }
 
 self.addEventListener("install", (event) => {
-  //event.waitUntil(precache());
 });
 
 self.addEventListener("fetch", (event) => {
