@@ -1,16 +1,20 @@
+## ¿De qué se trata esto?
+
+Este es un reproducir de audio inspirado en el clásico Winamp, lo
+escribí muy artesanalmente y escribí un post sobre cómo
+lo armé acá:
+
+https://www.examplelab.com.ar/posts/2024-05-11-creando-retroplayer/
+
+
 ## Demostración
 
 Puedes acceder a la aplicación usando este link:
 
 - https://hugoruscitti.github.io/retroplayer/
 
-
 Y si quieres instalar la aplicación tienes que pulsar este botón en
 la barra de dirección del navegador:
-
-
-
-
 
 
 ## Instalación
@@ -23,13 +27,17 @@ Para facilitar un poco las cosas durante el desarrollo se
 puede usar un webserver que actualice el navegador
 automáticamente como este:
 
+```
 pip install httpwatcher
 httpwatcher
+```
 
 o bien:
 
+```
 npm install -g live-server
 live-server
+```
 
 Las dos herramientas hacen lo mismo, muestran la aplicación
 en un navegador y mantienen actualizado el contenido ante
@@ -75,5 +83,3 @@ así que también se puede buscar en el código.
 
 Tener en cuenta que los nombres de eventos siempre comienzan con el prefijo
 "evento-" para facilitar la búsqueda en el código.
-
-evento-r
