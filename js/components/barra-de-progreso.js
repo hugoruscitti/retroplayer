@@ -37,7 +37,7 @@ export default class BarraDeProgreso extends HTMLElement {
 
   actualizar(evento) {
     let cursor = this.querySelector("#cursor");
-    let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.element.parentElement);
+    let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.parentElement);
 
     bus.enviar("evento-solicita-cambiar-tiempo", { porcentaje });
   }
