@@ -15,13 +15,12 @@ export default class BarraDeProgreso extends HTMLElement {
       <div>
     `;
 
-    let progreso = this.querySelector("#progreso");
+    const progreso = this.querySelector("#progreso");
 
     // Este componente no almacena el progreso de la canción, simplemente
     // "escucha" si el player cambia la posición de la canción y en ese
     // caso se re-dibuja.
     bus.conectar("evento-cambia-tiempo", this.cuando_cambia_el_tiempo.bind(this));
-
 
     // Los siguientes eventos se utilizan para que el usuario pueda
     // solicitar un cambio en la posición de la canción. Notar que acá
@@ -37,17 +36,17 @@ export default class BarraDeProgreso extends HTMLElement {
   }
 
   actualizar(evento) {
-    let progreso = this.querySelector("#cursor");
-    let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.parentElement);
+    let cursor = this.querySelector("#cursor");
+    let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.element.parentElement);
 
-    bus.enviar("evento-solicita-cambiar-tiempo", {porcentaje});
+    bus.enviar("evento-solicita-cambiar-tiempo", { porcentaje });
   }
 
   posicionar_cursor(porcentaje) {
-    let cursor = this.querySelector("#cursor");
-    let tamaño = cursor.parentElement.clientWidth - cursor.clientWidth;
+    const cursor = this.querySelector("#cursor");
+    const tamaño = cursor.parentElement.clientWidth - cursor.clientWidth;
 
-    cursor.style.left = `${(porcentaje/100) * tamaño}px`;
+    cursor.style.left = `${(porcentaje / 100) * tamaño}px`;
   }
 
   on_mouse_down() {
@@ -58,6 +57,8 @@ export default class BarraDeProgreso extends HTMLElement {
   }
 
   on_mouse_up(evento) {
+    const cursor = this.querySelector("#cursor");
+
     if (this.mouse_down) {
       let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.parentElement);
       this.posicionar_cursor(porcentaje);
@@ -78,15 +79,15 @@ export default class BarraDeProgreso extends HTMLElement {
 
   on_mouse_move(evento) {
     if (this.mouse_down) {
-      let porcentaje = this.obtener_porcentaje(evento.clientX, cursor.parentElement);
+      let porcentaje = this.obtener_porcentaje(evento.clientX, evento.parent.parentElement);
       this.posicionar_cursor(porcentaje);
     }
   }
 
   cuando_cambia_el_tiempo(evento) {
     if (!this.mouse_down) {
-      let {actual, duracion} = evento.detail;
-      this.posicionar_cursor((actual /duracion) * 100);
+      let { actual, duracion } = evento.detail;
+      this.posicionar_cursor((actual / duracion) * 100);
     }
   }
 

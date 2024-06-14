@@ -3,7 +3,7 @@ import datos from "../datos.js";
 
 export default class PlaylistItem extends HTMLElement {
 
-  constructor() {
+  constructor( ) {
     super();
   }
 

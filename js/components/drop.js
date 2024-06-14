@@ -30,11 +30,6 @@ class Drop extends HTMLElement {
     ev.preventDefault();
   }
 
-  disconnectedCallback() {
-    drop_zone.removeEventListener("drop", this.drop_handler.bind(this));
-    drop_zone.removeEventListener("dragover", this.on_drag_over.bind(this));
-  }
-
   async abrir_archivos(archivos_originales) {
     let archivos = [];
     let entries = Array.from(archivos_originales).map(e => e.webkitGetAsEntry());

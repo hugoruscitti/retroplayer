@@ -1,5 +1,4 @@
 class Bus {
-
   constructor() {
     this.eventos = [
       "evento-cambia-la-lista-de-archivos",
@@ -27,14 +26,14 @@ class Bus {
   enviar(nombre, datos) {
     this.validar_evento(nombre, datos);
 
-    let evento = new CustomEvent(nombre, {detail: datos});
+    const evento = new CustomEvent(nombre, { detail: datos });
     document.dispatchEvent(evento);
   }
 
   validar_evento(nombre, datos) {
     console.assert(typeof nombre === "string", "Nombre inválido");
     console.assert(typeof datos === "object", "Datos inválidos");
-    console.assert(this.eventos.includes(nombre), "Evento '" +nombre + "' no declarado");
+    console.assert(this.eventos.includes(nombre), "Evento '" + nombre + "' no declarado");
   }
 
   conectar(nombre, funcion) {
@@ -44,9 +43,8 @@ class Bus {
   desconectar(nombre, funcion) {
     document.removeEventListener(nombre, funcion);
   }
-
 }
 
-var bus = new Bus();
+const bus = new Bus();
 
 export default bus;

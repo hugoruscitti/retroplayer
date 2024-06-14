@@ -19,7 +19,7 @@ function formatear_tiempo(tiempo) {
 async function obtener_file_object(file_entry) {
   return new Promise((success) => {
     file_entry.file((file) => {
-      success(file);
+      success(file)
     });
   });
 }
@@ -27,7 +27,7 @@ async function obtener_file_object(file_entry) {
 
 async function leer_directorio(directory_entry) {
   return new Promise(success => {
-    let lector = directory_entry.createReader();
+    const lector = directory_entry.createReader();
 
     lector.readEntries(entries => {
       success(entries);
@@ -40,7 +40,7 @@ function es_archivo_de_audio(item) {
 
   if (nombre.endsWith(".mp4") || nombre.endsWith(".mp3")) {
     return true;
-  }  else {
+  } else {
     return false;
   }
 }
