@@ -58,7 +58,7 @@
   </body>
 
   <script>
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && (process?.type !== 'renderer')) {
       navigator.serviceWorker.register("./serviceworker.js");
     }
   </script>
